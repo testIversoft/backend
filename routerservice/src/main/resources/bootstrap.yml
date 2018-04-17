@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: RouterService
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        failFast: false
+        healthCheckPath: /status/health
+        healthCheckInterval: 20s
+        healthCheckCriticalTimeout: 3m
+        preferIpAddress: true
+        instanceId: ${spring.application.name}:${random.uuid}
+      config:
+        enabled: true
+        failFast: false
+        prefix: routerserviceconfiguration
+        defaultContext: defaultapplication

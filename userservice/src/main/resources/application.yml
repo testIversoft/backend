@@ -1,0 +1,38 @@
+server:
+  port: 9000
+
+spring:
+  output:
+    ansi:
+      enabled: always
+
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+
+      discovery:
+        enabled: true
+        healthCheckPath: /status/health
+        healthCheckInterval: 20s
+        instanceId: ${spring.application.name}:${random.value}
+        tags: ["UserManagementService"]
+
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: create
+    properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/iversoft?useSSL=false&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+    username: iversoft
+    password: password
+
+# changing Spring Actuator base path
+management:
+  endpoints:
+    web:
+      base-path: /status
+
